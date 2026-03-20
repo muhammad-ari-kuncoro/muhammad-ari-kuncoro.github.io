@@ -40,6 +40,196 @@
       --font-mono: 'DM Mono', monospace;
     }
 
+     /* EXPERIENCE TIMELINE */
+  .exp-timeline {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .exp-item {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+ 
+  .exp-line-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+ 
+  .exp-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--sage);
+    border: 3px solid var(--cream);
+    box-shadow: 0 0 0 2px var(--sage-light);
+    flex-shrink: 0;
+    z-index: 1;
+    transition: transform 0.3s;
+  }
+ 
+  .exp-item:hover .exp-dot {
+    transform: scale(1.3);
+    background: var(--sage-dark);
+  }
+ 
+  .exp-vline {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(180deg, var(--sage-light), var(--border));
+    margin-top: 6px;
+    min-height: 32px;
+  }
+ 
+  .exp-card {
+    flex: 1;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-left: 20px;
+    margin-bottom: 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage-light), var(--holo2), var(--dusty));
+    border-radius: 20px 20px 0 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+ 
+  .exp-item:hover .exp-card {
+    transform: translateX(6px);
+    border-color: var(--sage-light);
+    box-shadow: 0 16px 48px rgba(125, 155, 118, 0.12);
+  }
+ 
+  .exp-item:hover .exp-card::before {
+    opacity: 1;
+  }
+ 
+  .exp-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+ 
+  .exp-company {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+ 
+  .exp-role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+ 
+  .exp-meta-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+ 
+  .exp-badge {
+    display: inline-block;
+    border-radius: 100px;
+    padding: 3px 12px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+ 
+  .exp-badge-fulltime {
+    background: rgba(125, 155, 118, 0.15);
+    border: 1px solid rgba(125, 155, 118, 0.35);
+    color: var(--sage-dark);
+  }
+ 
+  .exp-badge-paruh {
+    background: rgba(201, 185, 154, 0.2);
+    border: 1px solid rgba(201, 185, 154, 0.4);
+    color: var(--text-mid);
+  }
+ 
+  .exp-period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+ 
+  .exp-location {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+ 
+  .exp-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+ 
+  .exp-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+ 
+  /* Dark mode overrides */
+  html.dark .exp-card {
+    background: var(--cream2);
+  }
+ 
+  @media (max-width: 768px) {
+    .exp-card-top {
+      flex-direction: column;
+    }
+ 
+    .exp-meta-right {
+      text-align: left;
+    }
+ 
+    .exp-card {
+      padding: 20px;
+      margin-left: 12px;
+    }
+ 
+    .exp-line-wrap {
+      width: 28px;
+    }
+  }
+
     /* DARK MODE VARIABLES */
     html.dark {
       --cream: #141410;
@@ -557,15 +747,15 @@
       font-family: var(--font-serif);
       font-size: 20px;
       font-style: italic;
-      color: var(--sage-dark);
+      color: white;
     }
 
-    .nav-brand span {
+    /* .nav-brand span {
       background: linear-gradient(135deg, var(--sage), var(--holo2), var(--dusty));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
+    } */
 
     .nav-links {
       display: flex;
@@ -1708,11 +1898,9 @@
   </button>
 
   <nav>
-    <div class="nav-brand"><span>Ari Kuncoro</span> ✿</div>
+    <div class="nav-brand"><span>My Portofolio</span></div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#portfolio">Work</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1784,293 +1972,12 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="sec-header reveal">
-      <span class="sec-label">✦ 01 · about me</span>
-      <h2 class="sec-title">Tentang <em>Saya</em></h2>
-      <div class="sec-ornament">
-        <div class="orn-line"></div><span class="orn-symbol">✿</span>
-        <div class="orn-line"></div>
-      </div>
-    </div>
-    <div class="about-grid">
-      <div class="about-card reveal">
-        <div class="about-card-top">
-          <div class="about-avatar">👨‍💻</div>
-          <div class="about-card-name">Muhammad Ari Kuncoro</div>
-          <div class="about-card-role">Fullstack Developer</div>
-        </div>
-        <div class="about-info">
-          <div class="info-row"><span class="info-key">Lahir</span><span class="info-val">11 Maret 2003</span></div>
-          <div class="info-row"><span class="info-key">Lokasi</span><span class="info-val">Bekasi, Jawa Barat</span>
-          </div>
-          <div class="info-row"><span class="info-key">Telepon</span><span class="info-val">+62 812-1474-9103</span>
-          </div>
-          <div class="info-row"><span class="info-key">Email</span><span class="info-val">arikuncorom@gmail.com</span>
-          </div>
-          <div class="info-row"><span class="info-key">Status</span><span class="info-val"><span class="badge-open">●
-                Open to Work</span></span></div>
-        </div>
-      </div>
-      <div class="about-text reveal reveal-delay-1">
-        <h3>Halo! Gue Ari ✦</h3>
-        <p>Lulusan <strong>S1 Software Engineering 2025</strong> dari Universitas Bina Insani, dengan fondasi kuat dari
-          SMKN 2 Kota Bekasi jurusan Rekayasa Perangkat Lunak.</p>
-        <p>Gue punya pengalaman membangun aplikasi <strong>web dan mobile</strong> dari nol — menangani seluruh siklus
-          pengembangan dari desain arsitektur hingga deployment.</p>
-        <p>Fleksibel dalam tim maupun solo, cepat adaptasi, dan selalu semangat buat nyiptain solusi teknologi yang
-          efisien dan berdampak.</p>
-        <div class="about-quote-slider">
-          <div class="quote-track" style="text-align: center;">
-            <div class="about-quote active">✦ Life Is Tricky Baby, Stay In Your Magic</div>
-            <div class="about-quote">✿ The Winners Take it All</div>
-            <div class="about-quote">Money Does not Buy Happiness it make crazy Happiness</div>
-          </div>
-          <div class="quote-dots">
-            <span class="qdot active"></span>
-            <span class="qdot"></span>
-            <span class="qdot"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="sec-header reveal">
-      <span class="sec-label">✦ 02 · tech stack</span>
-      <h2 class="sec-title">Skill & <em>Tools</em></h2>
-      <div class="sec-ornament">
-        <div class="orn-line"></div><span class="orn-symbol">✿</span>
-        <div class="orn-line"></div>
-      </div>
-    </div>
-
-    <!-- LANGUAGES -->
-    <div style="margin-bottom: 40px;">
-      <p
-        style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">
-        ✦ Languages</p>
-      <div class="skills-grid">
-        <div class="skill-pill reveal">
-          <span class="skill-emoji">🐘</span>
-          <div class="skill-pill-name">PHP</div>
-          <div class="skill-pill-cat">Backend · Server</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-1">
-          <span class="skill-emoji">🎯</span>
-          <div class="skill-pill-name">Dart</div>
-          <div class="skill-pill-cat">Mobile · Language</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-2">
-          <span class="skill-emoji">⚡</span>
-          <div class="skill-pill-name">JavaScript</div>
-          <div class="skill-pill-cat">Frontend · Logic</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-3">
-          <span class="skill-emoji">🔷</span>
-          <div class="skill-pill-name">TypeScript</div>
-          <div class="skill-pill-cat">Frontend · Typed JS</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BACKEND & FRAMEWORK -->
-    <div style="margin-bottom: 40px;">
-      <p
-        style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">
-        ✦ Backend & Framework</p>
-      <div class="skills-grid">
-        <div class="skill-pill reveal">
-          <span class="skill-emoji">🔴</span>
-          <div class="skill-pill-name">Laravel</div>
-          <div class="skill-pill-cat">Framework · PHP</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-1">
-          <span class="skill-emoji">🔥</span>
-          <div class="skill-pill-name">CodeIgniter</div>
-          <div class="skill-pill-cat">Framework · PHP</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-2">
-          <span class="skill-emoji">💚</span>
-          <div class="skill-pill-name">Node JS</div>
-          <div class="skill-pill-cat">Backend · Runtime</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-3">
-          <span class="skill-emoji">🫀</span>
-          <div class="skill-pill-name">Livewire</div>
-          <div class="skill-pill-cat">TALL Stack · Laravel</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FRONTEND -->
-    <div style="margin-bottom: 40px;">
-      <p
-        style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">
-        ✦ Frontend</p>
-      <div class="skills-grid">
-        <div class="skill-pill reveal">
-          <span class="skill-emoji">🌊</span>
-          <div class="skill-pill-name">Tailwind CSS</div>
-          <div class="skill-pill-cat">UI · Utility CSS</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-1">
-          <span class="skill-emoji">🅱️</span>
-          <div class="skill-pill-name">Bootstrap</div>
-          <div class="skill-pill-cat">UI · Framework</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-2">
-          <span class="skill-emoji">⚛️</span>
-          <div class="skill-pill-name">React JS</div>
-          <div class="skill-pill-cat">Frontend · Library</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-3">
-          <span class="skill-emoji">🏔️</span>
-          <div class="skill-pill-name">Alpine JS</div>
-          <div class="skill-pill-cat">TALL Stack · Frontend</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MOBILE & SPECIAL -->
-    <div>
-      <p
-        style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">
-        ✦ Mobile & Special Stack</p>
-      <div class="skills-grid">
-        <div class="skill-pill reveal">
-          <span class="skill-emoji">💙</span>
-          <div class="skill-pill-name">Flutter</div>
-          <div class="skill-pill-cat">Mobile · Framework</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot empty"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-1">
-          <span class="skill-emoji">🌐</span>
-          <div class="skill-pill-name">HTML & CSS</div>
-          <div class="skill-pill-cat">Markup · Style</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <div class="skill-pill reveal reveal-delay-2"
-          style="grid-column: span 2; background: linear-gradient(135deg, var(--sage-pale), var(--holo4)); border-color: var(--sage-light);">
-          <span class="skill-emoji">🏆</span>
-          <div class="skill-pill-name">TALL Stack</div>
-          <div class="skill-pill-cat">Tailwind · Alpine JS · Livewire · Laravel</div>
-          <div class="skill-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
 
   <!-- EDUCATION -->
   <section id="education">
     <div class="sec-header reveal">
-      <span class="sec-label">✦ 03 · education</span>
+      <span class="sec-label">✦ 02 · education</span>
       <h2 class="sec-title">Perjalanan <em>Pendidikan</em></h2>
       <div class="sec-ornament">
         <div class="orn-line"></div><span class="orn-symbol">✿</span>
@@ -2101,11 +2008,118 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+<section id="experience" style="background: var(--cream);">
+  <div class="sec-header reveal">
+    <span class="sec-label">✦ 03 · experience</span>
+    <h2 class="sec-title">Pengalaman <em>Kerja</em></h2>
+    <div class="sec-ornament">
+      <div class="orn-line"></div><span class="orn-symbol">✿</span>
+      <div class="orn-line"></div>
+    </div>
+  </div>
+ 
+  <div class="exp-timeline">
+ 
+    <!-- EXP 1: Kamiko -->
+    <div class="exp-item reveal">
+      <div class="exp-line-wrap">
+        <div class="exp-dot"></div>
+        <div class="exp-vline"></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company">Kamiko Cipta Solusi</div>
+            <div class="exp-role">Software Programmer</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-badge exp-badge-paruh">Paruh Waktu</span>
+            <div class="exp-period">Okt 2025 — Feb 2025</div>
+            <div class="exp-location">📍 Jawa Barat, Indonesia</div>
+          </div>
+        </div>
+        <p class="exp-desc">
+          Mengembangkan solusi perangkat lunak untuk kebutuhan internal maupun klien perusahaan, meliputi perancangan arsitektur sistem, pengembangan fitur front-end dan back-end, serta pemeliharaan aplikasi yang sudah berjalan.
+        </p>
+        <div class="exp-stack">
+          <span class="proj-stack-tag">JavaScript</span>
+          <span class="proj-stack-tag">HTML</span>
+          <span class="proj-stack-tag">CSS</span>
+          <span class="proj-stack-tag">PHP</span>
+          <span class="proj-stack-tag">Laravel</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- EXP 2: Armindo — IT Support -->
+    <div class="exp-item reveal reveal-delay-1">
+      <div class="exp-line-wrap">
+        <div class="exp-dot"></div>
+        <div class="exp-vline"></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company">PT Armindo Jaya Mandiri</div>
+            <div class="exp-role">IT Support Specialist</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-badge exp-badge-fulltime">Purnawaktu</span>
+            <div class="exp-period">Agu 2024 — Oktober 2025</div>
+            <div class="exp-location">📍 Cikarang Timur, Jawa Barat</div>
+          </div>
+        </div>
+        <p class="exp-desc">
+          Bertanggung jawab atas pemeliharaan infrastruktur IT perusahaan, penanganan help desk, troubleshooting hardware & software, serta memastikan kelancaran operasional sistem teknologi informasi di lingkungan industri.
+        </p>
+        <div class="exp-stack">
+          <span class="proj-stack-tag">Technical Support</span>
+          <span class="proj-stack-tag">Help Desk</span>
+          <span class="proj-stack-tag">Networking</span>
+          <span class="proj-stack-tag">Troubleshooting</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- EXP 3: Armindo — Warehouse -->
+    <div class="exp-item reveal reveal-delay-2">
+      <div class="exp-line-wrap">
+        <div class="exp-dot"></div>
+        <div class="exp-vline"></div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-card-top">
+          <div>
+            <div class="exp-company">PT Armindo Jaya Mandiri</div>
+            <div class="exp-role">Helper Warehouse Administrator</div>
+          </div>
+          <div class="exp-meta-right">
+            <span class="exp-badge exp-badge-paruh">Paruh Waktu</span>
+            <div class="exp-period">Sep 2021 — Sep 2024</div>
+            <div class="exp-location">📍 Cikarang Timur, Jawa Barat</div>
+          </div>
+        </div>
+        <p class="exp-desc">
+          Membantu pengelolaan administrasi gudang meliputi koordinasi logistik, kontrol inventaris barang masuk dan keluar, serta memastikan keakuratan data stok gudang secara berkala.
+        </p>
+        <div class="exp-stack">
+          <span class="proj-stack-tag">Logistic Coordinator</span>
+          <span class="proj-stack-tag">Inventory Control</span>
+          <span class="proj-stack-tag">Warehouse Mgmt</span>
+        </div>
+      </div>
+    </div>
+
+ 
+  </div><!-- end exp-timeline -->
+</section>
+
   <!-- PORTFOLIO -->
   <section id="portfolio">
     <div class="sec-header reveal">
-      <span class="sec-label">✦ 04 · my work</span>
-      <h2 class="sec-title">Karya <em>Terbaik</em></h2>
+      <span class="sec-label">✦ 03 · my work</span>
+      <h2 class="sec-title">Proyek <em>Terbaik</em></h2>
       <div class="sec-ornament">
         <div class="orn-line"></div><span class="orn-symbol">✿</span>
         <div class="orn-line"></div>
@@ -2152,6 +2166,9 @@
               <span class="proj-stack-tag">Bootstrap</span>
               <span class="proj-stack-tag">PgSQL</span>
               <span class="proj-stack-tag">Node JS</span>
+              <span class="proj-stack-tag">Midtrans</span>
+              <span class="proj-stack-tag">Paypal</span>
+              <span class="proj-stack-tag">Paypal</span>
               <span class="proj-stack-tag">React Native</span>
               <span class="proj-stack-tag">Docker</span>
             </div>
@@ -2160,35 +2177,38 @@
 
         <!-- PROJECT 3 — tambahin project baru di sini -->
         <div class="proj-card">
-          <div class="proj-thumb proj-thumb-1">📱</div>
+          <div class="proj-thumb proj-thumb-1">Confidential</div>
           <div class="proj-body">
-            <div class="proj-tag">✦ Mobile Application</div>
-            <div class="proj-title">Project Ketiga Lo</div>
-            <p class="proj-desc">Deskripsi project ketiga lo di sini — ceritain fungsinya, dipakai buat apa, dan
-              dampaknya.</p>
+            <div class="proj-tag">✦ Web Application </div>
+            <div class="proj-title">Pengaduan Provider Management System</div>
+            <p class="proj-desc">Sistem manajemen pengaduan berbasis web yang memungkinkan pengguna untuk mengajukan
+              laporan, mengelola surat pengaduan, serta memantau progres dan timeline penanganan laporan secara
+              real-time — mulai dari tahap penerimaan hingga penyelesaian.</p>
             <div class="proj-stack">
-              <span class="proj-stack-tag">Dart</span>
-              <span class="proj-stack-tag">Flutter</span>
+              <span class="proj-stack-tag">Laravel</span>
+              <span class="proj-stack-tag">JQuery</span>
+              <span class="proj-stack-tag">Bootstrap</span>
+              <span class="proj-stack-tag">MySQL</span>
             </div>
           </div>
         </div>
 
         <!-- PROJECT 4 -->
         <div class="proj-card">
-          <div class="proj-thumb proj-thumb-2">🌐</div>
+          <div class="proj-thumb proj-thumb-2">Confidential</div>
           <div class="proj-body">
             <div class="proj-tag">✦ Web Application</div>
-            <div class="proj-title">Project Keempat Lo</div>
-            <p class="proj-desc">Deskripsi project keempat lo di sini.</p>
+            <div class="proj-title">Management E-Laundry Sistem</div>
+            <p class="proj-desc">Sistem manajemen laundry berbasis web yang dirancang untuk mempermudah pengelolaan
+              operasional usaha laundry, mencakup pencatatan order, pemantauan status cucian, hingga pelaporan transaksi
+              secara terstruktur dan efisien.</p>
             <div class="proj-stack">
-              <span class="proj-stack-tag">Tailwind</span>
-              <span class="proj-stack-tag">Alpine JS</span>
-              <span class="proj-stack-tag">Livewire</span>
-              <span class="proj-stack-tag">Laravel</span>
+              <span class="proj-stack-tag">CodeIgniter</span>
+              <span class="proj-stack-tag">JQuery</span>
+              <span class="proj-stack-tag">Bootstrap</span>
             </div>
           </div>
         </div>
-
       </div><!-- end proj-slider -->
 
       <!-- CONTROLS -->
