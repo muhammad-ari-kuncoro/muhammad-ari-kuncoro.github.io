@@ -555,6 +555,19 @@
     html.dark .theme-toggle .icon-moon {
       display: block;
     }
+    .tag {
+  background: rgba(125, 155, 118, 0.12);
+  border: 1px solid rgba(125, 155, 118, 0.25);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--sage-dark);
+  cursor: default;
+  transition: background 0.35s ease, border-color 0.35s ease, 
+              color 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
+}
 
     /* NAV dark transition */
     nav {
@@ -1923,10 +1936,6 @@
           <div class="hero-role-line"></div>
           <span class="hero-role" id="typed-role">Fullstack Web Developer</span>
         </div>
-        <p class="hero-desc">
-          Membangun pengalaman digital yang <em style="color:var(--sage-dark);font-style:italic;">indah</em> dan
-          fungsional — dari backend yang kokoh hingga tampilan yang memukau.
-        </p>
         <div class="hero-cta">
           <a href="#portfolio" class="btn-sage">Lihat Karya ✦</a>
           <a href="#contact" class="btn-outline">Say Hello ✉</a>
@@ -1960,11 +1969,20 @@
             <div class="card-divider"></div>
             <div class="card-tags">
               <span class="tag">Laravel</span>
+              <span class="tag">CodeIgniter</span>
               <span class="tag">PHP</span>
+              <span class="tag">Node JS</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Firebase</span>
               <span class="tag">JavaScript</span>
-              <span class="tag">Android</span>
+              <span class="tag">Flutter</span>
+              <span class="tag">Dart</span>
               <span class="tag">Bootstrap</span>
               <span class="tag">Java</span>
+              <span class="tag">GIT</span>
+              <span class="tag">Nginx</span>
             </div>
           </div>
         </div>
@@ -2048,6 +2066,9 @@
           <span class="proj-stack-tag">CSS</span>
           <span class="proj-stack-tag">PHP</span>
           <span class="proj-stack-tag">Laravel</span>
+          <span class="proj-stack-tag">Docker</span>
+          <span class="proj-stack-tag">Node JS</span>
+          <span class="proj-stack-tag">React JS</span>
         </div>
       </div>
     </div>
@@ -2434,6 +2455,35 @@
     slider.addEventListener('mouseleave', () => {
       projTimer = setInterval(() => goToSlide(projCurrent + 1), 4000);
     });
+
+    // HOLOGRAPHIC TAG HOVER
+const holoColors = [
+  { bg: 'rgba(184,212,200,0.35)', border: '#7db8a8', color: '#1a5c4a', shadow: 'rgba(184,212,200,0.5)' },
+  { bg: 'rgba(212,200,232,0.35)', border: '#a88cd4', color: '#4a2a80', shadow: 'rgba(212,200,232,0.5)' },
+  { bg: 'rgba(232,212,200,0.35)', border: '#d4906c', color: '#7a3a1a', shadow: 'rgba(232,212,200,0.5)' },
+  { bg: 'rgba(200,212,232,0.35)', border: '#6c90d4', color: '#1a3a7a', shadow: 'rgba(200,212,232,0.5)' },
+  { bg: 'rgba(232,200,212,0.35)', border: '#d46c90', color: '#7a1a3a', shadow: 'rgba(232,200,212,0.5)' },
+  { bg: 'rgba(212,232,200,0.35)', border: '#90d46c', color: '#3a7a1a', shadow: 'rgba(212,232,200,0.5)' },
+  { bg: 'rgba(232,232,184,0.35)', border: '#c4c456', color: '#5a5a0a', shadow: 'rgba(232,232,184,0.5)' },
+];
+
+document.querySelectorAll('.card-tags .tag').forEach((tag, i) => {
+  const c = holoColors[i % holoColors.length];
+  tag.addEventListener('mouseenter', () => {
+    tag.style.background = c.bg;
+    tag.style.borderColor = c.border;
+    tag.style.color = c.color;
+    tag.style.boxShadow = `0 6px 20px ${c.shadow}`;
+    tag.style.transform = 'translateY(-3px) scale(1.08)';
+  });
+  tag.addEventListener('mouseleave', () => {
+    tag.style.background = '';
+    tag.style.borderColor = '';
+    tag.style.color = '';
+    tag.style.boxShadow = '';
+    tag.style.transform = '';
+  });
+});
   </script>
 </body>
 
