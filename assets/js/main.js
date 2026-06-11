@@ -143,8 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (terminal) {
     if (reduceMotion) {
+      terminal.innerHTML = '';
       renderStatic();
     } else {
+      terminal.innerHTML = '';
       typeLines();
     }
   }
@@ -153,10 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const revealEls = document.querySelectorAll('.reveal');
 
   if ('IntersectionObserver' in window && !reduceMotion) {
+    revealEls.forEach(el => el.classList.add('pre-anim'));
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
+          entry.target.classList.remove('pre-anim');
           observer.unobserve(entry.target);
         }
       });

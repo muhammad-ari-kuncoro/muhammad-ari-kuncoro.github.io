@@ -372,7 +372,54 @@ section{
     display:flex;
     flex-wrap:wrap;
     gap:14px;
-    margin-bottom:56px;
+    margin-bottom:40px;
+}
+
+.social-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:40px;
+}
+
+.social-label{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted-2);
+}
+
+.social-icons{
+    display:flex;
+    gap:10px;
+}
+
+.social-icons a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:40px;
+    height:40px;
+
+    border:1px solid var(--border);
+    border-radius:8px;
+
+    color:var(--muted);
+
+    transition:border-color .25s ease, color .25s ease, transform .25s ease;
+}
+
+.social-icons a:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:translateY(-3px);
+}
+
+.social-icons svg{
+    width:18px;
+    height:18px;
 }
 
 .btn{
@@ -799,6 +846,8 @@ section{
 }
 
 .edu-card{
+    display:block;
+
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:14px;
