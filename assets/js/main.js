@@ -1,270 +1,203 @@
-/**
-* Template Name: MyResume
-* Updated: Jun 13 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
-  "use strict";
+/* =========================
+   ARI KUNCORO — PORTFOLIO 2026
+   script.js
+========================= */
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- Terminal typing effect ---------- */
+  const terminal = document.getElementById('terminalBody');
+
+  const lines = [
+    { type: 'cmd', text: 'whoami' },
+    { type: 'out', text: 'Muhammad Ari Kuncoro' },
+    { type: 'comment', text: '# Fullstack Developer — Laravel & Flutter' },
+    { type: 'gap' },
+    { type: 'cmd', text: 'status --check' },
+    { type: 'okline', text: '● available for work' },
+    { type: 'gap' },
+    { type: 'cmd', text: 'stack --top' },
+    { type: 'tags', items: ['Laravel', 'Flutter', 'PostgreSQL', 'React', 'Docker'] },
+    { type: 'gap' },
+    { type: 'cmd', text: 'whereis ari' },
+    { type: 'out', text: 'Bekasi, Indonesia 🇮🇩' }
+  ];
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function renderStatic() {
+    lines.forEach(line => terminal.appendChild(buildLineEl(line, true)));
+    appendCursorLine();
+  }
+
+  function buildLineEl(line, full) {
+    if (line.type === 'gap') {
+      const div = document.createElement('div');
+      div.style.height = '8px';
+      return div;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'term-line';
+
+    if (line.type === 'cmd') {
+      const prompt = document.createElement('span');
+      prompt.className = 'term-prompt';
+      prompt.textContent = '$';
+      row.appendChild(prompt);
+
+      const out = document.createElement('span');
+      out.className = 'term-output';
+      out.textContent = full ? line.text : '';
+      row.appendChild(out);
+    } else if (line.type === 'tags') {
+      const wrap = document.createElement('div');
+      wrap.className = 'term-tags';
+      if (full) {
+        line.items.forEach(t => {
+          const span = document.createElement('span');
+          span.textContent = t;
+          wrap.appendChild(span);
+        });
+      }
+      row.appendChild(wrap);
+      row.style.marginBottom = '0';
     } else {
-      return document.querySelector(el)
+      const out = document.createElement('span');
+      out.textContent = full ? line.text : '';
+      out.className =
+        line.type === 'comment' ? 'term-comment' :
+        line.type === 'okline' ? 'term-ok' :
+        'term-output';
+      row.appendChild(out);
     }
+
+    return row;
   }
 
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
+  function appendCursorLine() {
+    const row = document.createElement('div');
+    row.className = 'term-line';
+
+    const prompt = document.createElement('span');
+    prompt.className = 'term-prompt';
+    prompt.textContent = '$';
+
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+
+    row.appendChild(prompt);
+    row.appendChild(cursor);
+    terminal.appendChild(row);
+  }
+
+  async function typeLines() {
+    for (const line of lines) {
+      if (line.type === 'gap') {
+        terminal.appendChild(buildLineEl(line));
+        continue;
+      }
+
+      const el = buildLineEl(line, false);
+      terminal.appendChild(el);
+
+      if (line.type === 'cmd') {
+        const out = el.querySelector('.term-output');
+        await typeText(out, line.text, 35);
+        await wait(180);
+      } else if (line.type === 'tags') {
+        const wrap = el.querySelector('.term-tags');
+        for (const t of line.items) {
+          const span = document.createElement('span');
+          span.textContent = t;
+          wrap.appendChild(span);
+          await wait(90);
+        }
+        await wait(150);
       } else {
-        selectEl.addEventListener(type, listener)
+        const out = el.querySelector('span');
+        await typeText(out, line.text, 18);
+        await wait(220);
       }
     }
+    appendCursorLine();
   }
 
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
-
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
-  const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
-      }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
-
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos,
-      behavior: 'smooth'
-    })
-  }
-
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
-
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('body').classList.toggle('mobile-nav-active')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
-
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let body = select('body')
-      if (body.classList.contains('mobile-nav-active')) {
-        body.classList.remove('mobile-nav-active')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
-   * Preloader
-   */
-  let preloader = select('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove()
+  function typeText(el, text, speed) {
+    return new Promise(resolve => {
+      let i = 0;
+      const interval = setInterval(() => {
+        el.textContent = text.slice(0, i + 1);
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, speed);
     });
   }
 
-  /**
-   * Hero type effect
-   */
-  const typed = select('.typed')
-  if (typed) {
-    let typed_strings = typed.getAttribute('data-typed-items')
-    typed_strings = typed_strings.split(',')
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
+  if (terminal) {
+    if (reduceMotion) {
+      renderStatic();
+    } else {
+      typeLines();
+    }
   }
 
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
+  /* ---------- Scroll reveal ---------- */
+  const revealEls = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.15 });
 
-      let portfolioFilters = select('#portfolio-flters li', true);
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
 
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
+  /* ---------- Mobile nav toggle ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const navTabs = document.getElementById('navTabs');
 
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
-    }
+  if (navToggle && navTabs) {
+    navToggle.addEventListener('click', () => {
+      navTabs.classList.toggle('open');
+    });
 
-  });
+    navTabs.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navTabs.classList.remove('open'));
+    });
+  }
 
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
+  /* ---------- Scrollspy ---------- */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-tabs a[data-nav]');
 
-  /**
-   * Initiate portfolio details lightbox 
-   */
-  const portfolioDetailsLightbox = GLightbox({
-    selector: '.portfolio-details-lightbox',
-    width: '90%',
-    height: '90vh'
-  });
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
 
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
+    sections.forEach(sec => spy.observe(sec));
+  }
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Animation on scroll
-   */
-  window.addEventListener('load', () => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    })
-  });
-
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
-
-})()
+});
